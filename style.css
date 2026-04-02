@@ -1,0 +1,610 @@
+/* Default css file for jemdoc. */
+
+table#tlayout {
+    border: none;
+    border-collapse: separate;
+    background: white;
+}
+/*
+body {
+	background: white;
+	padding-bottom: 8px;
+	margin: 0;
+}
+*/
+html {
+  background-color: #eeeeee; 
+}
+
+body {
+  font-family: Georgia, Helvetica, Arial, Verdana, san-serif, Times;
+  color: #000;
+  background-color: #ffffff; 
+  text-align:left; /* for IE */
+  margin-top: 30px; 
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left:  50px;
+  padding-right: 50px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  max-width: 960px;
+}
+
+#layout-menu {
+	background: #f6f6f6;
+	border: 1px solid #dddddd;
+	padding-top: 0.5em;
+	padding-left: 8px;
+	padding-right: 8px;
+	font-size: 1.0em;
+	width: auto;
+	white-space: nowrap;
+    text-align: left;
+    vertical-align: top;
+}
+
+#layout-menu td {
+	background: #f4f4f4;
+    vertical-align: top;
+}
+
+#layout-content {
+	padding-top: 0.0em;
+	padding-left: 1.0em;
+	padding-right: 1.0em;
+    border: none;
+    background: white;
+    text-align: left;
+    vertical-align: top;
+}
+
+#layout-menu a {
+	line-height: 1.5em;
+	margin-left: 0.5em;
+}
+
+tt {
+    background: #ffffdd;
+}
+
+pre, tt {
+	font-size: 90%;
+	font-family: monaco, monospace;
+}
+
+a, a > tt {
+	color: #224b8d;
+	text-decoration: none;
+}
+
+a:hover {
+	border-bottom: 1px gray dotted;
+}
+
+#layout-menu a.current:link, #layout-menu a.current:visited {
+	color: #022b6d;
+	border-bottom: 1px gray solid;
+}
+#layout-menu a:link, #layout-menu a:visited, #layout-menu a:hover {
+	color: #527bbd;
+	text-decoration: none;
+}
+#layout-menu a:hover {
+	text-decoration: none;
+}
+
+div.menu-category {
+	border-bottom: 1px solid gray;
+	margin-top: 0.8em;
+	padding-top: 0.2em;
+	padding-bottom: 0.1em;
+	font-weight: bold;
+}
+
+div.menu-item {
+	padding-left: 16px;
+	text-indent: -16px;
+}
+
+div#toptitle {
+	padding-bottom: 0.2em;
+	margin-bottom: 1.5em;
+	/*border-bottom: 3px double gray;*/
+}
+
+/* Reduce space if we begin the page with a title. */
+div#toptitle + h2, div#toptitle + h3 {
+	margin-top: 0em;
+}
+
+.cat-widget {
+	position: fixed;
+	right: 28px;
+	bottom: 20px;
+	z-index: 999;
+	width: 132px;
+	pointer-events: auto;
+	user-select: none;
+}
+
+.cat-widget * {
+	box-sizing: border-box;
+}
+
+.cat-bubble {
+	position: absolute;
+	right: 8px;
+	bottom: 126px;
+	max-width: 190px;
+	padding: 9px 12px;
+	border-radius: 16px;
+	background: rgba(255, 255, 255, 0.96);
+	border: 1px solid #d7d7d7;
+	box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+	color: #3d2d27;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 13px;
+	line-height: 1.35;
+	opacity: 0;
+	transform: translateY(10px);
+	transition: opacity 0.25s ease, transform 0.25s ease;
+	pointer-events: none;
+}
+
+.cat-bubble:after {
+	content: "";
+	position: absolute;
+	right: 24px;
+	bottom: -10px;
+	width: 18px;
+	height: 18px;
+	background: rgba(255, 255, 255, 0.96);
+	border-right: 1px solid #d7d7d7;
+	border-bottom: 1px solid #d7d7d7;
+	transform: rotate(45deg);
+}
+
+.cat-bubble.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.cat-stage {
+	position: relative;
+	width: 142px;
+	height: 148px;
+	pointer-events: auto;
+	cursor: pointer;
+}
+
+.cat-photo-shadow {
+	position: absolute;
+	left: 34px;
+	bottom: 8px;
+	width: 78px;
+	height: 18px;
+	background: rgba(50, 34, 24, 0.18);
+	border-radius: 50%;
+	filter: blur(4px);
+	animation: cat-shadow-breathe 3s ease-in-out infinite;
+}
+
+.cat-photo-frame {
+	position: absolute;
+	left: 14px;
+	top: 6px;
+	width: 114px;
+	height: 126px;
+	border-radius: 28px;
+	overflow: hidden;
+	border: 4px solid rgba(255, 255, 255, 0.9);
+	box-shadow: 0 18px 32px rgba(38, 26, 19, 0.24);
+	background: linear-gradient(180deg, #edf6ff 0%, #d7e8f7 100%);
+	transform-origin: center bottom;
+	transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+	animation: cat-photo-bob 3s ease-in-out infinite;
+}
+
+.cat-photo {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: 52% 28%;
+	filter: saturate(1.04) contrast(1.03) brightness(1.02);
+}
+
+.cat-photo-glow {
+	position: absolute;
+	inset: 0;
+	background:
+		radial-gradient(circle at 32% 18%, rgba(255, 255, 255, 0.4), transparent 30%),
+		linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+	pointer-events: none;
+}
+
+.cat-photo-frame:after {
+	content: "";
+	position: absolute;
+	left: 12px;
+	right: 12px;
+	bottom: -10px;
+	height: 16px;
+	background: linear-gradient(180deg, rgba(240, 127, 147, 0.9), rgba(214, 87, 117, 0.92));
+	border-radius: 999px;
+	box-shadow: 0 2px 0 rgba(255, 255, 255, 0.2) inset;
+}
+
+.cat-photo-frame:before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: -2px;
+	width: 14px;
+	height: 14px;
+	margin-left: -7px;
+	background: radial-gradient(circle at 35% 35%, #ffe989, #e3ad1f 78%);
+	border-radius: 50%;
+	box-shadow: 0 0 0 2px rgba(121, 88, 13, 0.45);
+	z-index: 2;
+}
+
+.cat-photo-frame.is-blinking {
+	filter: brightness(0.98);
+}
+
+.cat-photo-frame.is-blinking .cat-photo,
+.cat-photo-frame.is-sleeping .cat-photo {
+	transform: scaleY(0.985);
+}
+
+.cat-photo-frame.is-sleeping {
+	filter: saturate(0.92) brightness(0.96);
+}
+
+.cat-stage:hover .cat-photo-frame {
+	box-shadow: 0 22px 34px rgba(38, 26, 19, 0.28);
+}
+
+.cat-heart {
+	position: absolute;
+	left: 50%;
+	bottom: 90px;
+	width: 16px;
+	height: 16px;
+	background: #ff7c8d;
+	transform: translateX(-50%) rotate(-45deg) scale(0.2);
+	opacity: 0;
+	pointer-events: none;
+}
+
+.cat-heart:before,
+.cat-heart:after {
+	content: "";
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	background: #ff7c8d;
+	border-radius: 50%;
+}
+
+.cat-heart:before {
+	top: -8px;
+	left: 0;
+}
+
+.cat-heart:after {
+	left: 8px;
+	top: 0;
+}
+
+.cat-heart.is-visible {
+	animation: cat-heart-rise 1.1s ease-out forwards;
+}
+
+@keyframes cat-breathe {
+	0%, 100% { transform: translateY(0) scaleY(1); }
+	50% { transform: translateY(-4px) scaleY(1.03); }
+}
+
+@keyframes cat-photo-bob {
+	0%, 100% { transform: translateY(0) rotate(0deg); }
+	50% { transform: translateY(-4px) rotate(-1deg); }
+}
+
+@keyframes cat-shadow-breathe {
+	0%, 100% { transform: scaleX(1); opacity: 0.18; }
+	50% { transform: scaleX(0.92); opacity: 0.12; }
+}
+
+@keyframes cat-sparkle-twinkle {
+	0%, 100% { opacity: 0.35; transform: scale(0.8); }
+	50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes cat-heart-rise {
+	0% {
+		opacity: 0;
+		transform: translateX(-50%) translateY(0) rotate(-45deg) scale(0.2);
+	}
+	20% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		transform: translateX(-50%) translateY(-42px) rotate(-45deg) scale(1);
+	}
+}
+
+@media (max-width: 700px) {
+	.cat-widget {
+		right: 8px;
+		bottom: 10px;
+		transform: scale(0.76);
+		transform-origin: right bottom;
+	}
+
+	.cat-bubble {
+		right: 0;
+		bottom: 120px;
+		max-width: 160px;
+		font-size: 12px;
+	}
+
+}
+
+div#subtitle {
+	margin-top: 0.0em;
+	margin-bottom: 0.0em;
+	padding-top: 0em;
+	padding-bottom: 0.1em;
+}
+
+em {
+	font-style: italic;
+}
+
+strong {
+	font-weight: bold;
+}
+
+
+h1, h2, h3 {
+	color: #527bbd;
+	margin-top: 0.7em;
+	margin-bottom: 0.5em;
+	padding-bottom: 0.2em;
+	line-height: 1.0;
+	padding-top: 0.5em;
+	border-bottom: 1px solid #aaaaaa;
+}
+
+h1 {
+	font-size: 165%;
+	padding-bottom: 0.3em;
+}
+
+h2 {
+	padding-top: 0.8em;
+	font-size: 125%;
+}
+
+h2 + h3 {
+    padding-top: 0.2em;
+}
+
+h3 {
+	font-size: 110%;
+	border-bottom: none;
+}
+
+p {
+	margin-top: 0.0em;
+	margin-bottom: 0.8em;
+	padding: 0;
+	line-height: 1.3;
+}
+
+pre {
+	padding: 0;
+	margin: 0;
+}
+
+div#footer {
+	font-size: small;
+	border-top: 1px solid #c0c0c0;
+	padding-top: 0.1em;
+	margin-top: 4.0em;
+	color: #c0c0c0;
+}
+
+div#footer a {
+	color: #80a0b0;
+}
+
+div#footer-text {
+	float: left;
+	padding-bottom: 8px;
+}
+
+ul, ol, dl {
+	margin-top: 0.2em;
+	padding-top: 0;
+	margin-bottom: 0.8em;
+}
+
+dt {
+	margin-top: 0.5em;
+	margin-bottom: 0;
+}
+
+dl {
+	margin-left: 20px;
+}
+
+dd {
+	color: #222222;
+}
+
+dd > *:first-child {
+	margin-top: 0;
+}
+
+ul {
+	list-style-position: outside;
+	list-style-type: square;
+}
+
+p + ul, p + ol {
+	margin-top: -0.5em;
+}
+
+li {
+	margin-top:0.9em;
+}
+
+ol {
+	list-style-position: outside;
+	list-style-type: decimal;
+}
+
+li p, dd p {
+	margin-bottom: 0.3em;
+}
+
+
+ol ol {
+	list-style-type: lower-alpha;
+}
+
+ol ol ol {
+	list-style-type: lower-roman;
+}
+
+p + div.codeblock {
+	margin-top: -0.6em;
+}
+
+div.codeblock, div.infoblock {
+	margin-right: 0%;
+	margin-top: 1.2em;
+	margin-bottom: 1.3em;
+}
+
+div.blocktitle {
+	font-weight: bold;
+	color: #cd7b62;
+	margin-top: 1.2em;
+	margin-bottom: 0.1em;
+}
+
+div.blockcontent {
+	border: 1px solid silver;
+	padding: 0.3em 0.5em;
+}
+
+div.infoblock > div.blockcontent {
+	background: #ffffee;
+}
+
+div.blockcontent p + ul, div.blockcontent p + ol {
+	margin-top: 0.4em;
+}
+
+div.infoblock p {
+	margin-bottom: 0em;
+}
+
+div.infoblock li p, div.infoblock dd p {
+	margin-bottom: 0.5em;
+}
+
+div.infoblock p + p {
+	margin-top: 0.8em;
+}
+
+div.codeblock > div.blockcontent {
+	background: #f6f6f6;
+}
+
+span.pycommand {
+	color: #000070;
+}
+
+span.statement {
+	color: #008800;
+}
+span.builtin {
+	color: #000088;
+}
+span.special {
+	color: #990000;
+}
+span.operator {
+	color: #880000;
+}
+span.error {
+	color: #aa0000;
+}
+span.comment, span.comment > *, span.string, span.string > * {
+	color: #606060;
+}
+
+@media print {
+	#layout-menu { display: none; }
+}
+
+#fwtitle {
+	margin: 2px;
+}
+
+#fwtitle #toptitle {
+	padding-left: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+#layout-content h1:first-child, #layout-content h2:first-child, #layout-content h3:first-child {
+	margin-top: -0.7em;
+}
+
+div#toptitle h1, #layout-content div#toptitle h1 {
+	margin-bottom: 0.0em;
+	padding-bottom: 0.1em;
+	padding-top: 0;
+	margin-top: 0.5em;
+	border-bottom: none;
+}
+
+img.eq {
+	padding: 0;
+	padding-left: 0.1em;
+	padding-right: 0.1em;
+	margin: 0;
+}
+
+img.eqwl {
+	padding-left: 2em;
+	padding-top: 0.6em;
+	padding-bottom: 0.2em;
+	margin: 0;
+}
+
+table + table {
+    margin-top: 1em;
+}
+
+tr.heading {
+    font-weight: bold;
+    border-bottom: 2px solid black;
+}
+
+img {
+    border: none;
+}
+
+table.imgtable, table.imgtable td {
+    border: none;
+    text-align: left;
+}
